@@ -3,7 +3,16 @@ const app = express()
 const port = 3000
 
 app.get( "/" , (req, res) => {
-  res.send("hello world!!")
+  res.redirect("/restaurants")
+})
+
+app.get( "/restaurants" , (req, res) => {
+  res.send("listing restaurants here!")
+})
+
+app.get( "/restaurant/:id" , (req, res) => {
+  const id = req.params.id
+  res.send(`reading restaurant${id}`)
 })
 
 app.listen(port , () => {
