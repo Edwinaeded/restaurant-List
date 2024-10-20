@@ -15,14 +15,14 @@ app.get( "/" , (req, res) => {
 
 app.get( "/restaurants" , (req, res) => {
   const keyWord = req.query.searchTerm
-  const matchedRestaurants = restaurants.filter(function(restaurant){
+  const matchedRestaurants = keyWord? restaurants.filter(function(restaurant){
     return Object.values(restaurant).some((values) => {
       if (typeof(values) === 'string' ){
         return values.toLowerCase().trim().includes(keyWord.toLowerCase().trim())
       }
       return false
     })
-  })
+  }) : restaurants
   res.render("index" , { restaurants : matchedRestaurants , keyWord })
 })
 
