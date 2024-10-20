@@ -1,4 +1,4 @@
-# Taipei TOP8 Restaurant List
+# Taipei TOP8 Restaurant Recommendation List
 A simple web application for Taipei restaurant recommendation
 
 ## Features
@@ -15,18 +15,26 @@ A simple web application for Taipei restaurant recommendation
 
 ## Installation
 1. Clone this project with Terminal
-``` $ git clone 網址 ```
+``` 
+$ git clone https://github.com/Edwinaeded/restaurant-list.git 
+```
 
 2. Open the project with Terminal
-``` cd restaurant-List ```
-``` code . ```
+``` 
+$ cd restaurant-List
+$ code . 
+```
 
 3. Install the prerequisites 
 
 4. Execute the script with Terminal
-``` npm run dev ```
+``` 
+$ npm run dev 
+```
 or
-``` npm start ```
+``` 
+$ npm start
+ ```
 
 5. See the web application on http://localhost:3000
 
