@@ -24,7 +24,7 @@ $ git clone https://github.com/Edwinaeded/restaurant-list.git
 $ cd restaurant-List 
 ```
 
-3. Install the prerequisite packages
+3. Install the prerequisite packages  
 **node.js**
 ```
 $ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
