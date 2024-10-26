@@ -5,6 +5,10 @@
   <meta charset="utf-8">
   {{!-- 引入bootstrap css --}}
   <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+  {{!-- 引入頁面各自的 css --}}
+  {{#if cssFile}}
+  <link href={{cssFile}} rel="stylesheet">
+  {{/if}}
   <script src="https://kit.fontawesome.com/0a10ee0d88.js" crossorigin="anonymous"></script>
   <title>Example App</title>
 </head>

@@ -23,13 +23,13 @@ app.get( "/restaurants" , (req, res) => {
       return false
     })
   }) : restaurants
-  res.render("index" , { restaurants : matchedRestaurants , keyWord })
+  res.render("index" , { cssFile : "/stylesheets/index_style.css" , restaurants : matchedRestaurants , keyWord })
 })
 
 app.get( "/restaurant/:id" , (req, res) => {
   const id = req.params.id
   const restaurant = restaurants.find((restaurant) => restaurant.id.toString() === id )
-  res.render("show" , {restaurant})
+  res.render("show", { cssFile: "/stylesheets/show_style.css" , restaurant})
 })
 
 app.listen(port , () => {
