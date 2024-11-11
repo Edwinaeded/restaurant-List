@@ -1,6 +1,6 @@
 const express = require("express")
 const { engine } = require("express-handlebars")
-const restaurants = require("./public/jsons/restaurant.json").results
+//const restaurants = require("./public/jsons/restaurant.json").results
 const app = express()
 const port = 3000
 
@@ -17,22 +17,33 @@ app.get( "/" , (req, res) => {
 })
 
 app.get( "/restaurants" , (req, res) => {
-  const keyWord = req.query.searchTerm
-  const matchedRestaurants = keyWord? restaurants.filter(function(restaurant){
-    return Object.values(restaurant).some((values) => {
-      if (typeof(values) === 'string' ){
-        return values.toLowerCase().trim().includes(keyWord.toLowerCase().trim())
-      }
-      return false
+  return Restaurant.findAll({
+    attributes: ["id","name","name_en","category","image","location","phone","google_map","rating","description"],
+    raw: true
+  })
+    .then((restaurants) => {
+      const keyWord = req.query.searchTerm
+      const matchedRestaurants = keyWord? restaurants.filter(function(restaurant){
+          return Object.values(restaurant).some((values) => {
+             if (typeof(values) === 'string' ){
+               return values.toLowerCase().trim().includes(keyWord.toLowerCase().trim())
+              }
+              return false
+          })
+      }) : restaurants
+      res.render("index" , { cssFile : "/stylesheets/index_style.css" , restaurants : matchedRestaurants , keyWord })
     })
-  }) : restaurants
-  res.render("index" , { cssFile : "/stylesheets/index_style.css" , restaurants : matchedRestaurants , keyWord })
 })
 
 app.get( "/restaurant/:id" , (req, res) => {
   const id = req.params.id
-  const restaurant = restaurants.find((restaurant) => restaurant.id.toString() === id )
-  res.render("show", { cssFile: "/stylesheets/show_style.css" , restaurant})
+  return Restaurant.findByPk(id , {
+    attributes: ["id", "name", "name_en", "category", "image", "location", "phone", "google_map", "rating", "description"],
+    raw: true
+  })
+    .then((restaurant) => {
+      res.render("show", { cssFile: "/stylesheets/show_style.css" , restaurant})
+    })
 })
 
 app.get("/restaurants/new", (req, res) => {
