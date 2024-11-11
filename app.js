@@ -32,6 +32,26 @@ app.get( "/restaurant/:id" , (req, res) => {
   res.render("show", { cssFile: "/stylesheets/show_style.css" , restaurant})
 })
 
+app.get("/restaurants/new", (req, res) => {
+  res.send("create new restaurant page")
+})
+
+app.post("/restaurant", (req, res) => {
+  res.send("A restaurant been created")
+})
+
+app.get("/restaurant/:id/edit", (req, res) => {
+  res.send("edit restaurant detail page")
+})
+
+app.put("/restaurant/:id", (req, res) => {
+  res.send("A restaurant been edited")
+})
+
+app.delete("/restaurant/:id", (req, res) => {
+  res.send("A restaurant been deleted")
+})
+
 app.listen(port , () => {
   console.log ( `express server is running on http://localhost:${port}`)
 })
