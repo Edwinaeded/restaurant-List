@@ -4,13 +4,16 @@ const restaurants = require("./public/jsons/restaurant.json").results
 const app = express()
 const port = 3000
 
+const db = require("./models")
+const Restaurant = db.Restaurant
+
 app.use(express.static("public"))
 app.engine('.hbs', engine({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
 app.set('views', './views');
 
 app.get( "/" , (req, res) => {
-  res.redirect("/restaurants")
+  res.send("hello world")
 })
 
 app.get( "/restaurants" , (req, res) => {
