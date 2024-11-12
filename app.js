@@ -12,6 +12,8 @@ app.engine('.hbs', engine({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
 app.set('views', './views');
 
+app.use(express.urlencoded({ extended:true }));
+
 app.get( "/" , (req, res) => {
   res.send("hello world")
 })
@@ -47,11 +49,15 @@ app.get( "/restaurant/:id" , (req, res) => {
 })
 
 app.get("/restaurants/new", (req, res) => {
-  res.send("create new restaurant page")
+  res.render("new")
 })
 
 app.post("/restaurant", (req, res) => {
-  res.send("A restaurant been created")
+  const body = req.body
+  body.rating = body.rating === "" ? 0 : body.rating  // 將空字串轉為 0
+  console.log(body)
+  return Restaurant.create(body)
+    .then(() => res.redirect("/restaurants"))
 })
 
 app.get("/restaurant/:id/edit", (req, res) => {
