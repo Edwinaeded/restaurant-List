@@ -44,8 +44,9 @@
     <div class="col-md-10 col-12 mx-auto">
       <div class="row row-cols-sm-3">
         {{#each restaurants as |restaurant| }}
+        <div class="mb-4">
         <a href="/restaurant/{{restaurant.id}}" class="text-secondary">
-          <div class="card mb-3">
+          <div class="card">
             <img class="card-img-top" src="{{restaurant.image}}"
               alt="{{restaurant.name}}">
             <div class="card-body p-3">
@@ -59,12 +60,14 @@
                 {{restaurant.rating}}
                 <i class="fas fa-star fa-xs"></i>
               </span>
-
             </div>
           </div>
         </a>
+        <a href="/restaurant/{{restaurant.id}}/edit">Edit</a>
+        </div>
         {{/each}}
       </div>
     </div>
   </div>
 </div>
+

@@ -1,0 +1,51 @@
+<h1>Edit restaurant : {{ restaurant.name }}</h1>
+<form action="/restaurant/{{restaurant.id}}?_method=PUT" method="POST">
+  <div style="margin-top:15px;">
+    <input type="text" name="name" id="name" value="{{restaurant.name}}" required>
+    <label for="name">Name</label>
+  </div>
+  <div style="margin-top:15px;">
+    <input type="text" name="name_en" id="name_en" value="{{restaurant.name_en}}">
+    <label for="name_en">English name</label>
+  </div>
+  <div style="margin-top:15px;">
+    <input list="categorys" name="category" id="category" value="{{restaurant.category}}">
+    <datalist id="categorys">
+      <option>中式料理</option>
+      <option>日本料理</option>
+      <option>美式料理</option>
+      <option>中東料理</option>
+    </datalist>
+    <label for="category">Category</label>
+  </div>
+  <div style="margin-top:15px;">
+    <input type="type" name="image" id="image" value="{{restaurant.image}}" required>
+    <label for="image">Photo</label>
+  </div>
+  <div style="margin-top:15px;">
+    <input type="text" name="location" id="location" value="{{restaurant.location}}">
+    <label for="location">Location</label>
+  </div>
+  <div style="margin-top:15px;">
+    <input type="text" name="phone" id="phone" value="{{restaurant.phone}}">
+    <label for="phone">Phone</label>
+  </div>
+  <div style="margin-top:15px;">
+    <input type="text" name="google_map" id="google_map" value="{{restaurant.google_map}}">
+    <label for="google_map">Google map</label>
+  </div>
+  <div style="margin-top:15px;">
+    <input type="number" name="rating" id="rating" value="{{restaurant.rating}}">
+    <label for="rating">Rating</label>
+  </div>
+  <div style="margin-top:15px;">
+    <textarea rows="5" cols="50" name="description" id="description" required>{{ restaurant.description }}</textarea>
+    <label for="description">Description</label>
+  </div>
+  <div>
+    <button type="submit" class="btn btn-outline-primary" style="margin-top:15px;">Save</button>
+  </div>
+</form>
+<form action="/restaurants" method="GET" style="display:inline;">
+  <button type="submit" class="btn btn-outline-secondary" style="margin-top:15px;">Back</button>
+</form>

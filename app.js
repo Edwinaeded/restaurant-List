@@ -1,5 +1,6 @@
 const express = require("express")
 const { engine } = require("express-handlebars")
+const methodOverride = require("method-override")
 //const restaurants = require("./public/jsons/restaurant.json").results
 const app = express()
 const port = 3000
@@ -13,6 +14,7 @@ app.set('view engine', '.hbs');
 app.set('views', './views');
 
 app.use(express.urlencoded({ extended:true }));
+app.use(methodOverride("_method"))
 
 app.get( "/" , (req, res) => {
   res.send("hello world")
@@ -55,17 +57,28 @@ app.get("/restaurants/new", (req, res) => {
 app.post("/restaurant", (req, res) => {
   const body = req.body
   body.rating = body.rating === "" ? 0 : body.rating  // 將空字串轉為 0
-  console.log(body)
   return Restaurant.create(body)
     .then(() => res.redirect("/restaurants"))
 })
 
 app.get("/restaurant/:id/edit", (req, res) => {
-  res.send("edit restaurant detail page")
+  const id = req.params.id
+  return Restaurant.findByPk(id,{
+    attributes: ["id", "name", "name_en", "category", "image", "location", "phone", "google_map", "rating", "description"],
+    raw: true
+  })
+    .then((restaurant) => {
+      res.render("edit", { restaurant })
+    })
 })
 
 app.put("/restaurant/:id", (req, res) => {
-  res.send("A restaurant been edited")
+  const id = req.params.id
+  const body = req.body
+  body.rating = body.rating === "" ? 0 : body.rating // 將空字串轉為 0
+  console.log(body)
+  return Restaurant.update(body,{ where: { id } })
+    .then(() => res.redirect(`/restaurant/${id}`))
 })
 
 app.delete("/restaurant/:id", (req, res) => {

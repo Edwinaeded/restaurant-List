@@ -49,6 +49,13 @@
         {{restaurant.description}}
       </p>
 
+      <form action="/restaurant/{{restaurant.id}}/edit" style="display:inline;">
+        <input type="submit" value="Edit">
+      </form>
+      <form action="/restaurants" style="display:inline;">
+        <input type="submit" value="Back">
+      </form>
+
       <img class="rounded mx-auto d-block mb-4 w-100"
         src="{{restaurant.image}}" alt="{{restaurant.name}}"
         style="max-width: 600px;">
