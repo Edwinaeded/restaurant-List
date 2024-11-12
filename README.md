@@ -1,10 +1,13 @@
-# Taipei TOP8 Restaurant Recommendation List
+# Taipei Restaurant Recommendation List
 A simple web application for Taipei restaurant recommendation
 
 ## Features
 - Overview recommendation restaurants
 - See the details of each restaurant
 - Search restaurants with keyword
+- Add restaurant to list
+- Update restaurant details
+- Delete restaurant from list 
 
 ## Prerequisites
 - Visual Studio Code
@@ -12,6 +15,10 @@ A simple web application for Taipei restaurant recommendation
 - [express v4.21.1](https://www.npmjs.com/package/express)
 - [express-handlebars v8.0.1](https://www.npmjs.com/package/express-handlebars)
 - [nodemon v3.1.7](https://www.npmjs.com/package/nodemon)
+- mysql2 v3.2.0
+- sequelize v6.30.0
+- sequelize-cli v6.6.0
+- method-override v3.0.0
 
 ## Installation
 1. Clone this project with Terminal
@@ -25,17 +32,8 @@ $ cd restaurant-List
 ```
 
 3. Install the prerequisite packages  
-**node.js**
 ```
-$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-$ nvm install 18.15.0
-$ nvm use 18.15.0
-```
-**npm packages**
-```
-$ npm install express
-$ npm install express-handlebars
-$ npm install -g nodemon
+$ npm install
 ```
 
 4. Execute the script with Terminal
