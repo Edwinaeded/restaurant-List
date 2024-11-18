@@ -1,5 +1,5 @@
 <h1>Edit restaurant : {{ restaurant.name }}</h1>
-<form action="/restaurant/{{restaurant.id}}?_method=PUT" method="POST">
+<form action="/restaurants/{{restaurant.id}}?_method=PUT" method="POST">
   <div style="margin-top:15px;">
     <input type="text" name="name" id="name" value="{{restaurant.name}}" required>
     <label for="name">Name</label>

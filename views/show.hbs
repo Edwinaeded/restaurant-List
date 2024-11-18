@@ -49,13 +49,13 @@
         {{restaurant.description}}
       </p>
 
-      <form action="/restaurant/{{restaurant.id}}/edit" style="display:inline;">
+      <form action="/restaurants/{{restaurant.id}}/edit" style="display:inline;">
         <input type="submit" value="Edit">
       </form>
       <form action="/restaurants" style="display:inline;">
         <input type="submit" value="Back">
       </form>
-      <form action="/restaurant/{{restaurant.id}}?_method=DELETE" method="POST" style="display:inline;">
+      <form action="/restaurants/{{restaurant.id}}?_method=DELETE" method="POST" style="display:inline;">
         <input type="submit" value="Delete">
       </form>
 
