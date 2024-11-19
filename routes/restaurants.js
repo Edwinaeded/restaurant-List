@@ -5,9 +5,19 @@ const db = require('../models')
 const Restaurant = db.Restaurant
 
 router.get('/', (req, res) => {
+  const option = String(req.query.option)
+  const orderOption = {
+    byAtoZ: ['name', 'ASC'],
+    byZtoA: ['name', 'DESC'],
+    byCategory: ['category'],
+    byRegion: ['location']
+  }
+  const orderBy = orderOption[option] || ['id', 'ASC']
+
   return Restaurant.findAll({
     attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],
-    raw: true
+    raw: true,
+    order: [orderBy]
   })
     .then((restaurants) => {
       const keyWord = req.query.searchTerm
@@ -21,7 +31,7 @@ router.get('/', (req, res) => {
           })
         })
         : restaurants
-      res.render('index', { cssFile: '/stylesheets/index_style.css', restaurants: matchedRestaurants, keyWord })
+      res.render('index', { cssFile: '/stylesheets/index_style.css', restaurants: matchedRestaurants, keyWord, option })
     })
 })
 router.get('/new', (req, res) => {

@@ -7,7 +7,14 @@ const app = express()
 const port = 3000
 
 app.use(express.static('public'))
-app.engine('.hbs', engine({ extname: '.hbs' }))
+app.engine('.hbs', engine({
+  extname: '.hbs',
+  helpers: {
+    eq: function (a, b) {
+      return a === b
+    }
+  }
+}))
 app.set('view engine', '.hbs')
 app.set('views', './views')
 

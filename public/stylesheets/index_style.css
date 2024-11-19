@@ -36,6 +36,14 @@ header {
   color: #9b4b4b;
 }
 
+.search-bar .select-form{
+  text-align: right;
+}
+
+.search-bar .form-select{
+  margin-top: 10px;
+}
+
 .form-control::placeholder {
   color: #aaaaaa;
   font-size: 0.8rem;

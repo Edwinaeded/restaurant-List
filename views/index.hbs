@@ -7,6 +7,11 @@
           width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
         我的餐廳清單
       </a>
+      <div style="">
+        <form action="/restaurants/new" method="GET">
+          <button type="submit" class="btn btn-primary">Add new restaurant</button>
+        </form>
+      </div>
     </div>
   </nav>
 
@@ -15,27 +20,32 @@
 
 <!-- search bar -->
 <div class="container search-bar">
-  <div class="search-bar-outer">
-    <div class="search-bar-inner">
-      <form action="/restaurants">
-        <h4 class="mb-2">尋找餐廳：</h4>
-        <div class="input-group">
-          <input type="text" name="searchTerm" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
-            value="{{keyWord}}" aria-describedby="search-button">
-          <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+    <div class="search-bar-outer">
+      <div class="search-bar-inner">
+        <form action="/restaurants">
+          <h4 class="mb-2">尋找餐廳：</h4>
+          <div class="input-group">
+            <input type="text" name="searchTerm" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
+              value="{{keyWord}}" aria-describedby="search-button">
+            <div class="input-group-append">
+              <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            </div>
           </div>
-        </div>
+        </form>
+      </div>
+    </div>
+    <div class="select-form">
+      <form action="/restaurants" method="GET">
+        <select class="form-select" name="option" id="option" aria-label="Default select example" style="width:200px;display:inline;" value="hihi">
+          <option selected>Sort</option>
+          <option value="byAtoZ" {{#if (eq option 'byAtoZ' )}}selected{{/if}}>A -> Z</option>
+          <option value="byZtoA" {{#if (eq option 'byZtoA' )}}selected{{/if}}>Z -> A</option>
+          <option value="byCategory" {{#if (eq option 'byCategory' )}}selected{{/if}}>類別</option>
+          <option value="byRegion" {{#if (eq option 'byRegion' )}}selected{{/if}}>地區</option>
+        </select>
+        <input type="submit" value="排序">
       </form>
     </div>
-  </div>
-</div>
-
-<!-- create button -->
-<div style="margin-left:175px;margin-top:20px;">
-  <form action="/restaurants/new" method="GET">
-    <button type="submit" class="btn btn-primary">Add new restaurant</button>
-  </form>
 </div>
 
 <!-- restaurant list -->
