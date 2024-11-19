@@ -1,8 +1,11 @@
 const express = require('express')
 const { engine } = require('express-handlebars')
 const methodOverride = require('method-override')
+const session = require('express-session')
+const flash = require('connect-flash')
+const messageHandler = require('./middlewares/message-handler')
+const errorHandler = require('./middlewares/error-handler')
 const router = require('./routes')
-// const restaurants = require("./public/jsons/restaurant.json").results
 const app = express()
 const port = 3000
 
@@ -20,9 +23,18 @@ app.set('views', './views')
 
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+app.use(session({
+  secret: 'ThisIsSecret',
+  resave: false,
+  saveUnititialized: false
+}))
+app.use(flash())
 
+app.use(messageHandler)
 app.use(router)
+app.use(errorHandler)
 
 app.listen(port, () => {
   console.log(`express server is running on http://localhost:${port}`)
 })
+
