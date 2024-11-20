@@ -86,3 +86,17 @@
   </div>
 </div>
 
+<div style="text-align: center; margin-bottom: 50px;">
+  <form style="display:inline; margin:0 auto;">
+    <input type="hidden" name="page" value="{{ prev }}">
+    <input type="hidden" name="option" value="{{ option }}">
+    <button type="submit" class="btn btn-dark">Prev</button>
+  </form>
+  <form style="display:inline; margin:0 auto;">
+    <input type="hidden" name="page" value="{{ next }}">
+    <input type="hidden" name="option" value="{{ option }}">
+    <button type="submit" class="btn btn-dark">Next</button>
+  </form>
+  <span>Page : {{ page }} |  </span>
+  <span>Sort: {{ option }}</span>
+</div>

@@ -5,7 +5,8 @@ const db = require('../models')
 const Restaurant = db.Restaurant
 
 router.get('/', (req, res, next) => {
-  const option = String(req.query.option)
+  // dropdown menu
+  const option = req.query.option || 'None'
   const orderOption = {
     byAtoZ: ['name', 'ASC'],
     byZtoA: ['name', 'DESC'],
@@ -13,8 +14,14 @@ router.get('/', (req, res, next) => {
     byRegion: ['location']
   }
   const orderBy = orderOption[option] || ['id', 'ASC']
+  
+  // 分頁器
+  const page = parseInt(req.query.page) || 1
+  const limit = 9
 
   return Restaurant.findAll({
+    limit ,
+    offset : (page - 1) * limit ,
     attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],
     raw: true,
     order: [orderBy]
@@ -31,7 +38,15 @@ router.get('/', (req, res, next) => {
           })
         })
         : restaurants
-      res.render('index', { cssFile: '/stylesheets/index_style.css', restaurants: matchedRestaurants, keyWord, option })
+      res.render('index', {
+        cssFile: '/stylesheets/index_style.css',
+        restaurants: matchedRestaurants,
+        keyWord,
+        option,
+        page,
+        prev: page > 1 ? page - 1 : 1,
+        next: page + 1
+      })
     })
     .catch((error) => {
       errorMessage = '資料取得失敗:('
