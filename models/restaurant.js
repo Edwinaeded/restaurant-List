@@ -28,10 +28,13 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
   }, {
     sequelize,
-    modelName: 'Restaurant'
+    modelName: 'Restaurant',
+    tableName: 'restaurants'
   })
   return Restaurant
 }
