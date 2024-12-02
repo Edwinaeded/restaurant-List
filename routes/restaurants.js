@@ -5,6 +5,8 @@ const db = require('../models')
 const Restaurant = db.Restaurant
 
 router.get('/', (req, res, next) => {
+  const { name , id } = req.user
+  console.log(req.user)
   // dropdown menu
   const option = req.query.option || 'None'
   const orderOption = {
@@ -20,9 +22,10 @@ router.get('/', (req, res, next) => {
   const limit = 9
 
   return Restaurant.findAll({
+    where: { userId: id },
     limit ,
     offset : (page - 1) * limit ,
-    attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],
+    attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description', 'userId'],
     raw: true,
     order: [orderBy]
   })
@@ -59,9 +62,11 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/', (req, res, next) => {
-  const body = req.body
+  const { name, name_en, category, image, location, phone, google_map, rating, description } = req.body
+  console.log(req.user) // 目前顯示undifined,因為還沒加入使用者驗證
+  const userId = req.user.id
   body.rating = body.rating === '' ? 0 : body.rating // 將空字串轉為 0
-  return Restaurant.create(body)
+  return Restaurant.create({ name, name_en, category, image, location, phone, google_map, rating, description, userId })
     .then(() => {
       req.flash('success', '新增成功!')
       return res.redirect('/restaurants')

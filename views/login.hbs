@@ -1,12 +1,12 @@
 <h3>使用者登入</h3>
 {{> message}}
-<form>
+<form action="/login" method="POST">
   <div>
-    <input type="text" id="email">
+    <input type="text" name="email" id="email">
     <label for="email">Email</label>
   </div>
   <div style="margin-top: 5px;">
-    <input type="password" id="password">
+    <input type="password" name="password" id="password">
     <label for="password">密碼</label>
   </div>
   <div style="margin-top: 5px;">
