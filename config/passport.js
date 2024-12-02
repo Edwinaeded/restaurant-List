@@ -1,6 +1,7 @@
 const express = require('express')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
+const FacebookStrategy = require('passport-facebook')
 const bcrypt = require('bcryptjs')
 
 const db = require('../models')
@@ -27,6 +28,39 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (username, password, 
   .catch((error) => {
     errorMessage = '登入失敗:('
     done(error)
+  })
+}))
+
+passport.use(new FacebookStrategy({
+  clientID: process.env.FACEBOOK_CLIENT_ID,
+  clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+  callbackURL: 'http://localhost:3000/oauth2/facebook/redirect',
+  profileFields: ['email', 'displayName']
+},(accessToken, refreshToken, profile, done) => {
+  const email = profile.emails[0].value
+  const name = profile.displayName
+
+  return User.findOne({
+    where: { email },
+    attributes: ['id', 'name', 'email'],
+    raw: true
+  })
+  .then((user) => {
+    if (user) {
+      return done(null, user)
+    }
+
+    const randomPsw = Math.random.toString(36).slice(-8)
+    return bcrypt.hash(randomPsw, 10)
+    .then((hash) => {
+      return User.create({ name, email, password: hash})
+    })
+    .then((user) => {
+      return done(null, user)
+    })
+    .catch((error) => {
+      done(error)
+    })
   })
 }))
 

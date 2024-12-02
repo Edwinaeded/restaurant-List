@@ -5,6 +5,8 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash')
 
+require('dotenv').config()
+
 const passport = require('./config/passport')
 
 const messageHandler = require('./middlewares/message-handler')

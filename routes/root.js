@@ -12,6 +12,14 @@ router.post('/login', passport.authenticate('local', {
   failureFlash: true
 }))
 
+router.get('/login/facebook', passport.authenticate('facebook', { scope: ['email'] }))
+
+router.get('/oauth2/facebook/redirect', passport.authenticate('facebook', {
+  failureRedirect: '/login',
+  successRedirect: '/restaurants',
+  failureFlash: true
+}))
+
 router.get('/register', (req, res) => {
   res.render('register')
 })
